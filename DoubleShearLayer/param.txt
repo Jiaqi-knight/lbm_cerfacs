@@ -1,0 +1,34 @@
+===============================================================================
+This is an automatically created template parameter file for LEOPARD.
+It contains all the possible parameters in several sections.
+
+This file must be adjusted by the user.
+Comments are indicated by #. All info following a # is ignored.
+The sequence of the parameters is arbitrary and keywords are case insensitive.
+When a keyword occurs multiple times, the last value is taken.
+===============================================================================
+
+-------------------------------------------------------------------------------
+      GENERALITIES
+-------------------------------------------------------------------------------
+                    Configuration file: DoubleShearLayer.vtk 
+                             LBM model: D2Q9
+                       # Possibilities: (D2Q5, D2Q9)
+   Aero distribution development order: 2
+                       # Possibilities: (0, 1, 2)
+                        Regularisation: true
+
+-------------------------------------------------------------------------------
+      PHYSICAL PROPERTIES
+-------------------------------------------------------------------------------
+             Reference temperature (K): 300
+               Reference pressure (Pa): 101325
+           Kinematic viscosity (m^2/s): 0.0002
+
+-------------------------------------------------------------------------------
+       USER DATA
+-------------------------------------------------------------------------------
+                  number of iterations: 100
+            Periodicity in output file: 100
+
+                  number of threads: 4

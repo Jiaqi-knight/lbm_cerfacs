@@ -1,0 +1,3 @@
+#time meanKineticEnergy RMSKineticEnergy meanEnstrophy RMSEnstrophy 
+0 55.9447 10.3254 0.00118563 0.00524431
+5.5435e-05 55.9169 10.3805 0.00117237 0.0051452

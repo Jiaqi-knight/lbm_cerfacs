@@ -1,6 +1,8 @@
 # Declaration of variables
 CC = g++
-CC_FLAGS = -O3 -w -ansi -pedantic -fopenmp -g
+#CC_FLAGS = -g -O3 -openmp -qopenmp-simd
+#LD_FLAGS = -openmp
+CC_FLAGS = -O3 -fopenmp -g
 LD_FLAGS = -fopenmp
 
 COTEXT  = "\033[1;31m Compiling\033[0m\033[1m $(<F)\033[0m\n"

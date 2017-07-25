@@ -120,6 +120,7 @@ void collisionBGK(double ***f, double ***fEq){
 #pragma omp parallel for
   for (int i=0; i< Nx_; i++){
     for (int j=0; j < Ny_; j++){
+#pragma omp simd 
       for (int a=0; a < Q_; a++){
         f[i][j][a] = f[i][j][a] - omega * (f[i][j][a] - fEq[i][j][a]);
       }
@@ -138,7 +139,8 @@ void streaming(double ***f, double ***fStream){
   int in, ip, jn, jp;
 
   if (LBMmodel_=="D2Q4"){
-#pragma omp parallel for
+//#pragma omp parallel for
+//#pragma ivdep
     for (int i=0; i< Nx_; i++){       
       for (int j=0; j < Ny_; j++){  
         ip = ((i+1+Nx_))%Nx_;
@@ -156,7 +158,7 @@ void streaming(double ***f, double ***fStream){
   }
       
   if (LBMmodel_=="D2Q5"){
-#pragma omp parallel for
+//#pragma omp parallel for
     for (int i=0; i< Nx_; i++){       
       for (int j=0; j < Ny_; j++){  
         ip = ((i+1+Nx_))%Nx_;
@@ -175,8 +177,9 @@ void streaming(double ***f, double ***fStream){
   }
 
   if (LBMmodel_=="D2Q9"){
-#pragma omp parallel for
-    for (int i=0; i< Nx_; i++){       
+#pragma omp parallel for 
+    for (int i=0; i< Nx_; i++){
+#pragma omp simd  
       for (int j=0; j < Ny_; j++){  
         ip = ((i+1+Nx_))%Nx_;
         in = ((i-1+Nx_))%Nx_;
@@ -199,6 +202,7 @@ void streaming(double ***f, double ***fStream){
 #pragma omp parallel for
   for (int i=0; i < Nx_; i++){
     for (int j=0; j < Ny_; j++){
+#pragma omp simd 
       for (int a=0; a < Q_; a++){
         f[i][j][a] = fStream[i][j][a];
       }
@@ -217,7 +221,7 @@ void macroVar(double **rho, double **ux, double **uy, double ***f){
 
   if (aeroOrder_ == 0 || aeroOrder_ == 1){
     // Diffusion or Advection-Diffusion -> Computation of rho only !
-#pragma omp parallel for
+//#pragma omp parallel for
     for (int i=0; i < Nx_; i++){
       for (int j=0; j < Ny_; j++){
         rho[i][j] = 0.;
@@ -236,6 +240,7 @@ void macroVar(double **rho, double **ux, double **uy, double ***f){
         rho[i][j] = 0.;
         ux[i][j] = 0.;
         uy[i][j] = 0.;
+#pragma omp simd
         for (int a=0; a < Q_; a++){
           rho[i][j] += f[i][j][a];
           ux[i][j]  += ex_[a] * f[i][j][a];
@@ -282,6 +287,7 @@ void regularization(double ***f, double ***fEq){
         a1xy += (f[i][j][a] -fEq[i][j][a])*Hxy_[a];
         a1yy += (f[i][j][a] -fEq[i][j][a])*Hyy_[a];
       }
+#pragma omp simd
       for (int a=0; a < Q_; a++){
         fneq = (w_[a]/(2*cs4))*(a1xx*Hxx_[a] +2*a1xy*Hxy_[a] +a1yy*Hyy_[a]);
         f[i][j][a] = fEq[i][j][a] +fneq;

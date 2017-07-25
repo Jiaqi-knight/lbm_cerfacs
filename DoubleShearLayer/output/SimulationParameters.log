@@ -1,0 +1,29 @@
+//========== D2Q9 Computation ============//
+
+//========== Physical Parameters ===========//
+
+X Length :                    1 m
+Y Length :                    1 m
+Reference Temperature :       300 K
+Reference Pressure :          101325 Pa
+Sound Speed :                 347.279 m/s
+Kinematic Viscosity :         0.02 m2/s
+//========== Numerical Parameters ===========//
+
+Space Step:                   0.000333444 m
+Time  Step:                   5.5435e-07 s
+Relaxation Time (Tau) :       0.799149
+
+
+//============ CPU Performances =============//
+
+Number of nodes :             9e+06
+Number of iterations :        100 ite
+Mean time:           
+    - Total :                 114.603 (s)
+    - Equilibrium :           32.521 (s)
+    - Regularization :        0 (s)
+    - Collision :             12.079 (s)
+    - Streaming :             28.5533 (s)
+    - Macroscopic :           20.5646 (s)
+    - Output :                42.0186 (s)
